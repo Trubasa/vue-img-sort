@@ -1,6 +1,7 @@
 /**
  * Created by Trubasa 1141521502@qq.com on 2018/6/26.
  */
+import '../iconfont/iconfont.css'
 /*import '../scripts/vendor/web-animations-2.3.1.min'
 import '../scripts/vendor/hammer-2.0.8.min'
 import '../scripts/vendor/muuri-0.5.4'*/

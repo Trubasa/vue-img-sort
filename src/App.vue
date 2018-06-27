@@ -5,14 +5,16 @@
       @delete="deleteItem"
       @sorted="sorted">
     </vue-img-sort>
+
+    <img class="example" v-for="item in sortedList" :src="item.url" alt="">
   </div>
 </template>
-
 <script>
   export default {
     name: 'app',
     data() {
       return {
+        sortedList:[],
         msg: 'Welcome to Your Vue.js App',
         imgList: [{
           id: 1,
@@ -23,19 +25,19 @@
         }, {
           id: 3,
           url: 'https://placeimg.com/400/195/any?2',
+        }, {
+          id: 3,
+          url: 'https://placeimg.com/400/195/any?3',
         }]
       }
     },
     methods: {
-      deleteItem(element){
-        console.log('被删除的元素',element);
+      deleteItem(data){
+        console.log('被删除的数据',data.url);
       },
       sorted(list) {
-        var idList = list.map(function (index, ele) {  //排序之后的id数组
-          // console.log($(ele).offset().left,ele.dataset.id);
-          return (ele.dataset.id);
-        })
-        console.log('排序之后的id数组', idList);
+        this.sortedList=list;
+        console.log(list);
       }
     }
   }
@@ -46,7 +48,6 @@
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
     color: #2c3e50;
     margin-top: 60px;
   }
@@ -67,5 +68,9 @@
 
   a {
     color: #42b983;
+  }
+  .example{
+    height: 120px;
+    display: inline-block;
   }
 </style>

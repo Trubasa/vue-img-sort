@@ -49,15 +49,12 @@
       }
     },
     methods: {
-      deleteItem(element){
-        console.log('被删除的元素',element);
+      deleteItem(data){
+        console.log('被删除的数据',data.url);
       },
       sorted(list) {
-        var idList = list.map(function (index, ele) {  //排序之后的id数组
-          // console.log($(ele).offset().left,ele.dataset.id);
-          return (ele.dataset.id);
-        })
-        console.log('排序之后的id数组', idList);
+        this.sortedList=list;
+        console.log(list);
       }
     }
   })

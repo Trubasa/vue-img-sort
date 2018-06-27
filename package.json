@@ -1,7 +1,7 @@
 {
   "name": "vue-img-sort",
   "description": "sort image",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "trubasa <1141521502@qq.com>",
   "main": "dist/vue-img-sort.js",
   "repository": {
