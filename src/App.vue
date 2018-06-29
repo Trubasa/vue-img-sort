@@ -26,13 +26,14 @@
           id: 3,
           url: 'https://placeimg.com/400/195/any?2',
         }, {
-          id: 3,
+          id: 4,
           url: 'https://placeimg.com/400/195/any?3',
         }]
       }
     },
     methods: {
       deleteItem(data){
+        console.log(data);
         console.log('被删除的数据',data.url);
       },
       sorted(list) {

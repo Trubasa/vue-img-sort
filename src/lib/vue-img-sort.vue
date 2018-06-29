@@ -1,7 +1,7 @@
 <template>
   <div class="vue-img-sort">
     <div class="grid">
-      <div class="item" v-for="item,index in imgList" :data-id="item.id" :data-index="index">
+      <div class="item" v-for="item,index in imgList" :data-id="item.id" >
         <div class="delete_item" @click="removeElement($event)"><i class="vue-img-sort-icon icon-icon_wrong"></i></div>
         <div class="item-content">
           <img :src="item.url" @load="reLayout"/>
@@ -47,8 +47,8 @@
         }
       });
       this.grid.on('dragEnd', function (item, event) {  //拖拽结束后回调
-        // ////console.log(event);
-        // ////console.log(item);
+        // //////console.log(event);
+        // //////console.log(item);
         setTimeout(function () {  //等待拖拽的动画结束
           that.getSortedList();
         }, 300);
@@ -64,8 +64,8 @@
 
         var ary=[];
         sortedList.each(function (index,ele) {
-          //console.log(ele.dataset.index,$(ele).offset().top,$(ele).offset().left);
-          ary.push(that.imgList[ele.dataset.index]);
+          ////console.log(ele.dataset.index,$(ele).offset().top,$(ele).offset().left);
+          ary.push(that.getListElementById(ele.dataset.id));
         });
 
         this.sortedList=ary;
@@ -73,21 +73,34 @@
       reLayout(){
         this.grid.refreshItems().layout(); //重新排版
       },
+      getListElementById(id){
+        var that=this;
+        var obj={}
+        for(var i=0;i<that.imgList.length;i++){
+          if(that.imgList[i].id==id){
+            obj=that.imgList[i];
+
+            break;
+          }
+        }
+        return obj;
+      },
       removeElement(event){
-        ////console.log('删除元素', event.target.parentNode);
+        //console.log('删除元素', $(event.target).parents('.item')[0]);
         var that=this;
         this.$confirm('确定删除该图片?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          that.grid.remove([event.target.parentNode], {removeElements: true});  //删除元素
+
+          // //console.log(event.target.parentNode.dataset.index,that.imgList,that.img)
+          var deleteData=that.getListElementById($(event.target).parents('.item')[0].dataset.id);
+
+          that.$emit('delete',deleteData);
+
+          that.grid.remove([$(event.target).parents('.item')[0]], {removeElements: true});  //删除元素
           that.getSortedList();
-          that.$emit('delete',that.imgList[event.target.parentNode.dataset.index]);
-          /*this.$message({
-            type: 'success',
-            message: '删除成功!'
-          });*/
         }).catch(() => {
         });
       }
