@@ -1,4 +1,4 @@
-# vuePictureManager
+# vue-img-sort
 该项目为图片管理插件，使用vue，element-ui，muuri。
 [demo（在源码的example目录下）](https://trubasa.github.io/vue-img-sort/example/index.html)
 
